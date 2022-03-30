@@ -10,15 +10,14 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.sensors.CANCoder;
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxLimitSwitch;
-import com.revrobotics.CANSparkMax.IdleMode;
-
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -26,10 +25,18 @@ public class Shooter extends SubsystemBase {
 
   TalonFX leftShooter = new TalonFX(19);
   TalonFX rightShooter = new TalonFX(20);
-  CANSparkMax hood = new CANSparkMax(21, com.revrobotics.CANSparkMaxLowLevel.MotorType.kBrushless);
+  CANSparkMax hood = new CANSparkMax(
+    21,
+    com.revrobotics.CANSparkMaxLowLevel.MotorType.kBrushless
+  );
   RelativeEncoder encoder = hood.getEncoder();
-  SparkMaxLimitSwitch backLimitSwitch = hood.getForwardLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyOpen);//back
-  SparkMaxLimitSwitch forwardLimitSwitch = hood.getReverseLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyOpen);//forward
+  SparkMaxLimitSwitch backLimitSwitch = hood.getForwardLimitSwitch(
+    SparkMaxLimitSwitch.Type.kNormallyOpen
+  ); //back
+  SparkMaxLimitSwitch forwardLimitSwitch = hood.getReverseLimitSwitch(
+    SparkMaxLimitSwitch.Type.kNormallyOpen
+  ); //forward
+
   // Magazine m_magazine = new Magazine();
 
   /** Creates a new Shooter. */
@@ -58,7 +65,6 @@ public class Shooter extends SubsystemBase {
     rightShooter.set(ControlMode.PercentOutput, -0.75);
   }
 
-  
   public void shootHigh() {
     leftShooter.config_kP(0, Constants.SHOOTING_Kp, 30);
     leftShooter.config_kI(0, Constants.SHOOTING_Ki, 30);
@@ -70,11 +76,20 @@ public class Shooter extends SubsystemBase {
     rightShooter.config_kD(0, Constants.SHOOTING_Kd, 30);
     rightShooter.config_kF(0, Constants.SHOOTING_Kf, 30);
     rightShooter.config_IntegralZone(0, 50);
-    leftShooter.set(ControlMode.Velocity, Constants.SHOOTING_UNITS_PER_REV * Constants.SHOOTING_TARGET_RPM_HIGH / 600);
-    rightShooter.set(ControlMode.Velocity, Constants.SHOOTING_UNITS_PER_REV * Constants.SHOOTING_TARGET_RPM_HIGH / 600);
+    leftShooter.set(
+      ControlMode.Velocity,
+      Constants.SHOOTING_UNITS_PER_REV *
+      Constants.SHOOTING_TARGET_RPM_HIGH /
+      600
+    );
+    rightShooter.set(
+      ControlMode.Velocity,
+      Constants.SHOOTING_UNITS_PER_REV *
+      Constants.SHOOTING_TARGET_RPM_HIGH /
+      600
+    );
   }
 
-    
   public void customShootHigh(double velocity) {
     leftShooter.config_kP(0, Constants.SHOOTING_Kp, 30);
     leftShooter.config_kI(0, Constants.SHOOTING_Ki, 30);
@@ -102,9 +117,14 @@ public class Shooter extends SubsystemBase {
     rightShooter.config_kF(0, Constants.SHOOTING_Kf, 30);
     rightShooter.config_IntegralZone(0, 50);
 
-
-    leftShooter.set(ControlMode.Velocity, Constants.SHOOTING_UNITS_PER_REV * Constants.SHOOTING_TARGET_RPM_LOW / 600);
-    rightShooter.set(ControlMode.Velocity, Constants.SHOOTING_UNITS_PER_REV * Constants.SHOOTING_TARGET_RPM_LOW / 600);
+    leftShooter.set(
+      ControlMode.Velocity,
+      Constants.SHOOTING_UNITS_PER_REV * Constants.SHOOTING_TARGET_RPM_LOW / 600
+    );
+    rightShooter.set(
+      ControlMode.Velocity,
+      Constants.SHOOTING_UNITS_PER_REV * Constants.SHOOTING_TARGET_RPM_LOW / 600
+    );
   }
 
   public double getShooterError() {
@@ -125,14 +145,13 @@ public class Shooter extends SubsystemBase {
     rightShooter.config_IntegralZone(0, 50);
     leftShooter.set(ControlMode.PercentOutput, 0.0);
     rightShooter.set(ControlMode.PercentOutput, 0.0);
-    
-    
   }
 
-  public boolean isBackLimitSwitchTriggered(){
+  public boolean isBackLimitSwitchTriggered() {
     return backLimitSwitch.isPressed();
   }
-  public boolean isForwardLimitSwitchTriggered(){
+
+  public boolean isForwardLimitSwitchTriggered() {
     return forwardLimitSwitch.isPressed();
   }
 
@@ -144,7 +163,7 @@ public class Shooter extends SubsystemBase {
     return 0;
   }
 
-  public void zeroEncoderOfHood(){
+  public void zeroEncoderOfHood() {
     hood.getEncoder().setPosition(0);
   }
 
@@ -153,7 +172,7 @@ public class Shooter extends SubsystemBase {
     rightShooter.set(ControlMode.PercentOutput, -.5);
   }
 
-  public double motorOutput(){
+  public double motorOutput() {
     return leftShooter.getMotorOutputPercent();
   }
 
@@ -165,10 +184,6 @@ public class Shooter extends SubsystemBase {
     return encoder.getPosition();
   }
 
-
-
   @Override
-  public void periodic() {
- 
-  }
+  public void periodic() {}
 }

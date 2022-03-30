@@ -6,7 +6,6 @@ package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMax.IdleMode;
-
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.PrintCommand;
@@ -15,21 +14,23 @@ import frc.robot.Constants;
 
 public class Magazine extends SubsystemBase {
 
-
-  CANSparkMax lowerMagazine = new CANSparkMax(16, com.revrobotics.CANSparkMaxLowLevel.MotorType.kBrushless);
-  CANSparkMax upperMagazine = new CANSparkMax(17, com.revrobotics.CANSparkMaxLowLevel.MotorType.kBrushless);
+  CANSparkMax lowerMagazine = new CANSparkMax(
+    16,
+    com.revrobotics.CANSparkMaxLowLevel.MotorType.kBrushless
+  );
+  CANSparkMax upperMagazine = new CANSparkMax(
+    17,
+    com.revrobotics.CANSparkMaxLowLevel.MotorType.kBrushless
+  );
   AnalogInput lowerBallSensor = new AnalogInput(1);
   AnalogInput upperBallSensor = new AnalogInput(0);
 
-
-
-  
   /** Creates a new Magazine. */
   public Magazine() {
-  lowerMagazine.setIdleMode(IdleMode.kBrake);
-  upperMagazine.setIdleMode(IdleMode.kBrake);
-  SmartDashboard.putBoolean("UPPER", ballInUpper());
-  SmartDashboard.putBoolean("LOWER", ballInLower());
+    lowerMagazine.setIdleMode(IdleMode.kBrake);
+    upperMagazine.setIdleMode(IdleMode.kBrake);
+    SmartDashboard.putBoolean("UPPER", ballInUpper());
+    SmartDashboard.putBoolean("LOWER", ballInLower());
   }
 
   public void runLowerMag(double speed) {
@@ -61,7 +62,6 @@ public class Magazine extends SubsystemBase {
     lowerMagazine.set(0);
     upperMagazine.set(0);
   }
-
 
   @Override
   public void periodic() {

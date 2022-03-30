@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Limelight extends SubsystemBase {
+
   /** Creates a new Limelight. */
 
   NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
@@ -36,19 +37,23 @@ public class Limelight extends SubsystemBase {
     SmartDashboard.putBoolean("ANGLE", alignGood());
   }
 
-  public double getY(){
+  public double getY() {
     return y;
   }
-  public double getX(){
+
+  public double getX() {
     return tx.getDouble(0.0);
   }
-  public double ifValidTarget(){
+
+  public double ifValidTarget() {
     return valid;
   }
-  public double getShortSide(){
+
+  public double getShortSide() {
     return shortside;
   }
-  public double getLongSide(){
+
+  public double getLongSide() {
     return longside;
   }
 
@@ -67,10 +72,11 @@ public class Limelight extends SubsystemBase {
       return false;
     }
   }
-  
-  public void targetingOnFunc(){
+
+  public void targetingOnFunc() {
     targetingOn = true;
   }
+
   public void targetToggle(boolean onOff) {
     targetingOn = onOff;
   }
@@ -80,24 +86,22 @@ public class Limelight extends SubsystemBase {
     //System.out.println(getX());
     if (targetingOn) {
       //System.out.println(getX());
-      if (getX() > 1){
-        if (getX() > 5){
+      if (getX() > 1) {
+        if (getX() > 5) {
           output = -.04 * getX();
-        }
-        else{
+        } else {
           output = -.02 * getX();
-        }  
-      } 
-      if (getX() < -1){
-        if (getX() < -5){
+        }
+      }
+      if (getX() < -1) {
+        if (getX() < -5) {
           output = -.04 * getX();
-        }
-        else{
+        } else {
           output = -.02 * getX();
-        }  
-      } 
-      if(Math.abs(getX()*-.04)>.5){
-        output = Math.signum(getX())*-.5;
+        }
+      }
+      if (Math.abs(getX() * -.04) > .5) {
+        output = Math.signum(getX()) * -.5;
       }
       return output;
     }

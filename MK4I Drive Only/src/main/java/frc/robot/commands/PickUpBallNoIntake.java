@@ -10,6 +10,7 @@ import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Magazine;
 
 public class PickUpBallNoIntake extends CommandBase {
+
   /** Creates a new PickUpBall. */
 
   private Magazine m_magazine;
@@ -26,34 +27,31 @@ public class PickUpBallNoIntake extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    
     // m_intake.moveIntake(-.4);
     // m_magazine.runLowerMag(0.7);
     // m_magazine.runUpperMag(-.7);
     // high no ball is ~250, with ball ~1100
     //System.out.println("High SENSOR VALUE:     " + m_magazine.getUpperBallSensor());
     //System.out.println("LOWER BALL SENSOR VALUE:     " + m_magazine.getLowerBallSensor());
-    if (m_magazine.getUpperBallSensor() > Constants.UPPER_BALL_SENSOR_THRESHOLD) {  
-
-      if(m_magazine.getLowerBallSensor() < Constants.UPPER_BALL_SENSOR_THRESHOLD){
-      //System.out.println("full");
-      m_magazine.runLowerMag(0);
-      m_magazine.runUpperMag(0);
-      }
-      else{
+    if (
+      m_magazine.getUpperBallSensor() > Constants.UPPER_BALL_SENSOR_THRESHOLD
+    ) {
+      if (
+        m_magazine.getLowerBallSensor() < Constants.UPPER_BALL_SENSOR_THRESHOLD
+      ) {
+        //System.out.println("full");
+        m_magazine.runLowerMag(0);
+        m_magazine.runUpperMag(0);
+      } else {
         //System.out.println("High ball in");
         m_magazine.runLowerMag(0.45);
         m_magazine.runUpperMag(0);
       }
-    } 
-    else {
+    } else {
       //System.out.println("Empty");
       m_magazine.runLowerMag(0.45);
       m_magazine.runUpperMag(-.2);
-    } 
-    
-    
-
+    }
   }
 
   // Called once the command ends or is interrupted.
@@ -66,7 +64,6 @@ public class PickUpBallNoIntake extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-
     return false;
   }
 }

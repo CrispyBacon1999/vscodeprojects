@@ -4,20 +4,19 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.Timer;
-
-import java.sql.Time;
-
 import com.ctre.phoenix.sensors.Pigeon2;
-
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Climber;
+import java.sql.Time;
 
 public class ClimbArmUp extends CommandBase {
+
   private final Pigeon2 m_pigeon = new Pigeon2(13);
   private Timer timer = new Timer();
   private Climber m_climber;
   boolean armsUp = false;
+
   /** Creates a new Climb. */
   public ClimbArmUp(Climber climber) {
     m_climber = climber;
@@ -36,19 +35,18 @@ public class ClimbArmUp extends CommandBase {
   public void execute() {
     //260000
     //274000
-  //   if (m_climber.getLeftEncoderTicks() < -275000) {
-  //     m_climber.runClimber(0);
-  //   } 
-  // else {
-  //   m_climber.runClimber(-.5);
-  // }
-  if(timer.get()<.5){
-    m_climber.runClimber(-.5);
-  }
-  else{
-    m_climber.runClimber(-1);
-  }  
-  //System.out.println(m_climber.getLeftEncoderTicks());
+    //   if (m_climber.getLeftEncoderTicks() < -275000) {
+    //     m_climber.runClimber(0);
+    //   }
+    // else {
+    //   m_climber.runClimber(-.5);
+    // }
+    if (timer.get() < .5) {
+      m_climber.runClimber(-.5);
+    } else {
+      m_climber.runClimber(-1);
+    }
+    //System.out.println(m_climber.getLeftEncoderTicks());
   }
 
   // Called once the command ends or is interrupted.
@@ -62,6 +60,5 @@ public class ClimbArmUp extends CommandBase {
   public boolean isFinished() {
     // return armsUp;
     return false;
-
   }
 }

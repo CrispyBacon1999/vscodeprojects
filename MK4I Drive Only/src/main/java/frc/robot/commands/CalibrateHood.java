@@ -8,7 +8,9 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Shooter;
 
 public class CalibrateHood extends CommandBase {
+
   Shooter m_shooter;
+
   /** Creates a new CalibrateHood. */
   public CalibrateHood(Shooter shooter) {
     // Use addRequirements() here to declare subsystem dependencies.
@@ -22,11 +24,10 @@ public class CalibrateHood extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (m_shooter.isBackLimitSwitchTriggered()){
+    if (m_shooter.isBackLimitSwitchTriggered()) {
       m_shooter.moveHood(0);
       m_shooter.zeroEncoderOfHood();
-    }
-    else{
+    } else {
       m_shooter.moveHood(.1);
     }
   }

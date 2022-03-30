@@ -14,6 +14,7 @@ import frc.robot.subsystems.Magazine;
 import frc.robot.subsystems.Shooter;
 
 public class ShootCustom extends CommandBase {
+
   /** Creates a new ShootHigh. */
 
   private Shooter m_shooter;
@@ -22,13 +23,18 @@ public class ShootCustom extends CommandBase {
   private double m_setHoodAngle;
   private final Timer timer = new Timer();
 
-  public ShootCustom(Shooter shooter, Magazine magazine, double RPM, double setHoodAngle) {
+  public ShootCustom(
+    Shooter shooter,
+    Magazine magazine,
+    double RPM,
+    double setHoodAngle
+  ) {
     // Use addRequirements() here to declare subsystem dependencies.
     m_shooter = shooter;
     m_magazine = magazine;
     m_setHoodAngle = setHoodAngle;
     m_RPM = RPM;
-    
+
     Shuffleboard.selectTab("Match");
   }
 
@@ -44,26 +50,28 @@ public class ShootCustom extends CommandBase {
   public void execute() {
     m_shooter.customShootHigh(m_RPM);
     double currentPosition = m_shooter.getHoodPosition();
-    double errorDis = currentPosition-m_setHoodAngle;
-    m_shooter.moveHood(errorDis*-.03);
-    if (timer.get()>.25) {
-      if (m_shooter.leftSpeed() < m_RPM*1.1 && m_shooter.leftSpeed() > m_RPM*0.9) {
-        if(m_magazine.getUpperBallSensor() < Constants.UPPER_BALL_SENSOR_THRESHOLD){
+    double errorDis = currentPosition - m_setHoodAngle;
+    m_shooter.moveHood(errorDis * -.03);
+    if (timer.get() > .25) {
+      if (
+        m_shooter.leftSpeed() < m_RPM * 1.1 &&
+        m_shooter.leftSpeed() > m_RPM * 0.9
+      ) {
+        if (
+          m_magazine.getUpperBallSensor() <
+          Constants.UPPER_BALL_SENSOR_THRESHOLD
+        ) {
           m_magazine.runLowerMag(.2);
           m_magazine.runUpperMag(-.2);
-        }
-        else{
+        } else {
           m_magazine.runLowerMag(0);
-          m_magazine.runUpperMag(-.2); 
+          m_magazine.runUpperMag(-.2);
         }
-  
-      }
-      else{
+      } else {
         m_magazine.runLowerMag(0);
-        m_magazine.runUpperMag(0);   
+        m_magazine.runUpperMag(0);
       }
     }
-
   }
 
   // Called once the command ends or is interrupted.
@@ -71,7 +79,7 @@ public class ShootCustom extends CommandBase {
   public void end(boolean interrupted) {
     m_shooter.customShootHigh(6000);
     m_magazine.runLowerMag(0);
-    m_magazine.runUpperMag(0);  
+    m_magazine.runUpperMag(0);
     m_shooter.moveHood(0);
   }
 

@@ -51,7 +51,7 @@ public class FiveBallRight extends SequentialCommandGroup {
     m_drivetrainSubsystem.zeroGyroscope();
 
     // Set field pose position to where robot is set up (generally)
-    m_drivetrainSubsystem.setFieldPosition(new Translation2d(7.8, 6), new Rotation2d(-Math.PI / 4));
+    m_drivetrainSubsystem.setFieldPosition(new Translation2d(7.61, 6), Rotation2d.fromDegrees(-90));
 
     TrajectoryConfig trajectoryConfig = Constants.auto.follower.T_CONFIG;
 

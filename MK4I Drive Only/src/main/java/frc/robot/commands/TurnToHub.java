@@ -16,7 +16,7 @@ import frc.robot.subsystems.Limelight;
 
 public class TurnToHub extends CommandBase {
   DrivetrainSubsystem m_drivetrain;
-  Limelight m_limelight
+  Limelight m_limelight;
   private final DoubleSupplier m_translationXSupplier;
   private final DoubleSupplier m_translationYSupplier;
 

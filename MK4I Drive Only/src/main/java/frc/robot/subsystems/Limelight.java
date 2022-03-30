@@ -81,11 +81,15 @@ public class Limelight extends SubsystemBase {
     targetingOn = onOff;
   }
 
+  public boolean isTargeting() {
+    return targetingOn;
+  }
+
   public double turnToTarget() {
-    //double x = getX();
-    //System.out.println(getX());
+    // double x = getX();
+    // System.out.println(getX());
     if (targetingOn) {
-      //System.out.println(getX());
+      // System.out.println(getX());
       if (getX() > 1) {
         if (getX() > 5) {
           output = -.04 * getX();

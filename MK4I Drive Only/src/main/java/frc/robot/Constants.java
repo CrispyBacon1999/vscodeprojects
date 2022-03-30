@@ -77,6 +77,10 @@ public final class Constants {
   public static final double LOWER_BALL_SENSOR_THRESHOLD = 1000;
   public static final double CLIMBER_HIGH_TICKS = 270000; //273141
 
+  public static final double HUB_AIM_ANGLE_ERROR = 0.5; // The angle that the "TurnToHub" command will approximate
+  public static final double HUB_CENTER_X = 8.22;
+  public static final double HUB_CENTER_Y = 4.11;
+
   public static final class swerve {
 
     //speed 0-1
